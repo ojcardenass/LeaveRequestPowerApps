@@ -1,0 +1,17 @@
+/** 
+ * Propiedad: DisplayMode
+ * - Si se encuentro una solicitud activa, o el valor es invalido, o la fecha de inicio es menor a la actual, se deshabilita el botón de enviar
+ */
+If(
+    solicitudEncontrada Or valorInvalido Or startDate < Today();
+    DisplayMode.Disabled;
+    DisplayMode.Edit
+)
+
+/**
+ * Propiedad: OnSelect
+ * - Se envía el formulario a la lista de solicitudes
+ * - Se navega a la pantalla de mis solicitudes
+ */
+SubmitForm(Form1);;
+Navigate(MisSolicitudes)

@@ -1,0 +1,7 @@
+/**
+ * Icono + para crear una nueva solicitud
+ * Propiedad: OnSelect
+ * - Al pulsar el icono se navega a la pantalla definidad en la propiedad del componente
+ * # Todas las paginas tienen el componente Header, y en todas se debe definir en la propiedad NuevaSolicitud la pantalla a la que se navega para crear una nueva solicitud
+ */
+Navigate(Header.NuevaSolicitud;ScreenTransition.None)

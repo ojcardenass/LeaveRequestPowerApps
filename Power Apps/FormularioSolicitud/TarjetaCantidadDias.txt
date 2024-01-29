@@ -1,0 +1,74 @@
+/** 
+ * Propiedad: OnChange
+ * - Guardar el valor ingresado de la cantidad de días en la variable CntDias
+ * - Si no existen solicitudes aprobadas para el solicitante y el tipo de solicitud seleccionado, guardar en la variable RemainDays el valor de los días permitidos para el tipo de solicitud seleccionado
+ * - Si existen solicitudes aprobadas para el solicitante y el tipo de solicitud seleccionado, guardar en la variable RemainDays el valor de los días restantes de la última solicitud aprobada
+ * - Si el valor de CntDias es menor a 1, mostrar un mensaje de error y guardar en la variable valorInvalido el valor true
+ * - Si el valor de RemainDays es nulo, comparar el valor de CntDias con los días permitidos para el tipo de solicitud seleccionado, si es mayor mostrar un mensaje de error y guardar en la variable valorInvalido el valor true, si es menor guardar en la variable RemainDays el valor de los días permitidos menos el valor de CntDias
+ * - Si el valor de RemainDays no es nulo, comparar el valor de CntDias con los días restantes, si es mayor mostrar un mensaje de error y guardar en la variable valorInvalido el valor true, si es menor guardar en la variable RemainDays el valor de los días restantes menos el valor de CntDias
+ */ 
+Set(
+    CntDias;
+    Value(Self.Text)
+);;
+If(
+    IsEmpty(
+        Filter(
+            solicitudes;
+            Solicitante.Email = User().Email And 'Tipo de solicitud'.Value = tipoSolicitud.Selected.Value And Estado.Value = "Aprobada"
+        )
+    );
+    Set(
+        RemainDays;
+        LookUp(
+            solicitudes;
+            Solicitante.DisplayName = solicitan.Selected.DisplayName And 'Tipo de solicitud'.Value = tipoSolicitud.Selected.Value
+        ).'Días restantes'
+    );
+    Set(
+        RemainDays;
+        LookUp(
+            solicitudes;
+            Solicitante.Email = User().Email And 'Tipo de solicitud'.Value = tipoSolicitud.Selected.Value And Estado.Value = "Aprobada"
+        ).'Días restantes'
+    )
+);;
+Set(
+    valorInvalido;
+    false
+);;
+If(
+    CntDias < 1;
+    Notify("Valor inválido");;
+    Set(
+        valorInvalido;
+        true
+    )
+);;
+If(
+    IsBlank(RemainDays);
+    If(
+        CntDias > diasPerm;
+        Notify("Valor superior a los días permitidos: " & diasPerm & " días");;
+        Set(
+            valorInvalido;
+            true
+        );
+        Set(
+            RemainDays;
+            diasPerm - CntDias
+        )
+    );
+    If(
+        CntDias > RemainDays;
+        Notify("Valor superior a los días disponibles: " & RemainDays & " días");;
+        Set(
+            valorInvalido;
+            true
+        );
+        Set(
+            RemainDays;
+            RemainDays - CntDias
+        )
+    )
+)

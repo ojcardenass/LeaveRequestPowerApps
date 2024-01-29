@@ -1,0 +1,5 @@
+/**
+Ocultar el texto presente en la barra de ingreso de texto
+- OnSelect
+**//
+Set(labelTxt;false)

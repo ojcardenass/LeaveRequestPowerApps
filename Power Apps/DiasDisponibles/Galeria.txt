@@ -1,0 +1,51 @@
+/** 
+ * Propiedad: Items
+ * Galeria con los datos provenientes de las lista de SharePoint
+ */
+diaspermitidos
+
+/** 
+ * Campos de texto dentro de la galeria
+ * 
+ * - Imagen:
+ */
+ThisItem.Icon
+
+/**
+ * - Titulo:
+ */
+ThisItem.Permiso
+
+/**
+ * - Subtitulo:
+ */
+"Días permitidos: " & Text(Value(ThisItem.Cantidad))
+
+/**
+ * - Dias disponibles:
+ * Si no hay solicitudes aprobadas, se muestra la cantidad de días permitidos
+ * Si hay solicitudes aprobadas, se muestra la cantidad de días restantes
+ */
+If(
+    IsEmpty(
+        Filter(
+            solicitudes;
+            Solicitante.Email = User().Email And 'Tipo de solicitud'.Value = ThisItem.Permiso And Estado.Value = "Aprobada"
+        )
+    );
+    LookUp(
+        diaspermitidos;
+        Permiso = ThisItem.Permiso
+    ).Cantidad;
+    LookUp(
+        solicitudes;
+        Solicitante.Email = User().Email And 'Tipo de solicitud'.Value = ThisItem.Permiso And Estado.Value = "Aprobada"
+    ).'Días restantes'
+) & " Días" 
+
+/** 
+ * - Solicitar:
+ * Texto con hipervinculo para solicitar permiso
+ * OnSelect
+ */
+Navigate(FormularioSolicitud)

@@ -1,0 +1,34 @@
+/** 
+ * Propiedad: OnSelect
+ * - Guardar/Filtrar las solicitudes del solicitante seleccionado
+ * - Guardar si el solicitante tiene una solicitud pendiente
+ * - Notificar si el solicitante tiene una solicitud pendiente
+ * 
+ */
+Set(
+    filteredSolicitudes;
+    Filter(
+        solicitudes;
+        Solicitante.DisplayName = solicitan.Selected.DisplayName
+    )
+);;
+Set(
+    solicitudEncontrada;
+    !IsEmpty(
+        Filter(
+            filteredSolicitudes;
+            !(Estado.Value = "Aprobada" || Estado.Value = "Rechazada")
+        )
+    )
+);;
+If(
+    solicitudEncontrada;
+    Notify(
+        "Tiene una solicitud pendiente que no ha sido Aprobada o Rechazada.";
+        NotificationType.Warning
+    );
+    Set(
+        solicitudEncontrada;
+        false
+    )
+)

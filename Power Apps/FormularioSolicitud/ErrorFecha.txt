@@ -1,0 +1,5 @@
+/** 
+ * Propiedad: Texto
+ * Si la fecha de inicio es menor a la fecha actual, muestra un mensaje de error
+ */
+If(startDate < Today(); "La fecha de inicio debe ser mayor o igual a hoy";"")

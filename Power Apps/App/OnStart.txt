@@ -1,0 +1,52 @@
+
+/**
+ * Esta sección de código realiza las siguientes acciones:
+ * 1. Limpia y recopila los datos de las vacaciones en la colección "Holidays" filtrando los festivos del año actual.
+ * 2. Limpia y recopila los datos de la navegación del administrador en la colección "NavManager".
+ * 3. Limpia y recopila los datos de la navegación del empleado en la colección "NavEmployee".
+ * 
+ * - La colección "Holidays" contiene los festivos filtrados del año actual.
+ * - La colección "NavManager" contiene las opciones de navegación para el administrador.
+ * - La colección "NavEmployee" contiene las opciones de navegación para el empleado.
+ */
+ClearCollect(
+    Holidays;
+    Filter(
+        festivos;
+        Year(Fecha) = Year(Now())
+    )
+);;
+ClearCollect(
+    NavManager;
+    {
+        Title: "Mis solicitudes";
+        TargetScreen: MisSolicitudes
+    };
+    {
+        Title: "Festivos";
+        TargetScreen: Festivos
+    };
+    {
+        Title: "Logout";
+        TargetScreen: Principal
+    }
+);;
+ClearCollect(
+    NavEmployee;
+    {
+        Title: "Mis solicitudes";
+        TargetScreen: MisSolicitudes
+    };
+    {
+        Title: "Mis días disponibles";
+        TargetScreen: DíasDisponibles
+    };
+    {
+        Title: "Festivos";
+        TargetScreen: Festivos
+    };
+    {
+        Title: "Logout";
+        TargetScreen: Principal
+    }
+)

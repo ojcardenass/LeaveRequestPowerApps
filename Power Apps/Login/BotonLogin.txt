@@ -1,0 +1,48 @@
+/**
+ * Establece el valor del rol del usuario en función de las credenciales ingresadas por el usuario.
+ * Si las credenciales son correctas, navega a la pantalla correspondiente según el rol del usuario.
+ * Si las credenciales son incorrectas, muestra un mensaje de error.
+ * Si el rol corresponde a lider o nomina, se activa la vista de manager (ManagerView)
+ * Finalmente, restablece los campos de usuario y contraseña.
+ */
+
+Set(
+    userRoleValue;
+    LookUp(
+        credenciales;
+        Usuario = User.Text And Contraseña = Password.Text
+    ).Rol
+);;
+If(
+    IsBlankOrError(userRoleValue);
+    Notify("El nombre de usuario o contraseña son incorrectos");;
+    Set(
+        labelTxt;
+        true
+    );
+    Switch(
+        userRoleValue;
+        "empleado";
+        Set(
+            ManagerView;
+            false
+        );;
+        Navigate(MisSolicitudes)
+        ;
+        "lider";
+        Set(
+            ManagerView;
+            true
+        );;
+        Navigate(MisSolicitudes)
+        ;
+        "nomina";
+        Set(
+            ManagerView;
+            true
+        );;
+        Navigate(MisSolicitudes)
+    )
+);;
+Reset(User);;
+Reset(Password);;

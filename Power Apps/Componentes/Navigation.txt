@@ -1,0 +1,10 @@
+/**
+ * Barra lateral de navegacion
+ * Propiedad: NavItem
+ * - Al pulsar el icono se navega a la pantalla definidad en la propiedad del componente
+ * # Todas las paginas tienen el componente Navigation, y en todas se debe definir en la propiedad CurrentScreen la pantalla a la que se navega al seleccionar un item de la galeria
+ */
+Table({Title: "Mis solicitudes"; TargetScreen: App.ActiveScreen};
+{Title: "Mis días disponibles"; TargetScreen: App.ActiveScreen};
+{Title: "Festivos"; TargetScreen: App.ActiveScreen};
+{Title: "Logout"; TargetScreen: App.ActiveScreen})

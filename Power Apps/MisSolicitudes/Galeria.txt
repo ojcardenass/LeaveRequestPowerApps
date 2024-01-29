@@ -1,0 +1,18 @@
+/** 
+ * Propiedad: Items
+ * Selecciona las solicitudes que se muestran en la galería
+ * Si el usuario es un líder directo se muestran las solicitudes que están en estado "Pendiente Aprobación Líder", y que el líder directo sea el usuario actual
+ * Si el usuario es del area de nómina se muestran las solicitudes que están en estado "Pendiente Aprobación Nómina", y que el area de nómina sea el usuario actual
+ * Si el usuario es un empleado se muestran las solicitudes que el usuario actual creó
+ */
+If(
+    ManagerView;
+    Filter(
+        solicitudes;
+        (Estado.Value = "Pendiente Aprobación Líder" && 'Líder directo'.Email = User().Email) || (Estado.Value = "Pendiente Aprobación Nómina" && Nómina.Email = User().Email)
+    );
+    Filter(
+        solicitudes;
+        'Created By'.Email = User().Email
+    )
+)

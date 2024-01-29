@@ -1,0 +1,26 @@
+/** 
+ * Propiedad: OnSelect
+ * - Guarda la fecha seleccionada en la tarjeta de fecha de inicio en la variable global startDate
+ * - Crea la colección colDataRange con los días hábiles entre la fecha seleccionada y los siguientes 40 días
+ * - Elimina de la colección colDataRange los días que son fines de semana o festivos
+ */
+Set(startDate;Self.SelectedDate);;
+Clear(colDataRange);;
+ForAll(
+    Sequence(40;0;1); 
+    Collect(
+        colDataRange;
+        {RowIndex: CountRows(colDataRange) + 1;
+         Date: DateAdd(startDate; Value)}
+    )
+ );;
+ RemoveIf(
+    colDataRange;
+    Weekday(Date) = 1 || Weekday(Date) = 7 || CountRows(
+        Filter(
+            Holidays;
+            Fecha >= Date;
+            Fecha <= Date
+        )
+    ) > 0
+ );;

@@ -1,0 +1,15 @@
+/** 
+ * Propiedad: OnSelect
+ * Al presionar el icono de refresh, se actualiza la galería de solicitudes
+ * y Se reinicia el temporizador de auto refresh 
+ */
+Refresh(solicitudes);;
+Set(
+    autoRefresh;
+    false
+);;
+Reset(GalleryRefresh);;
+Set(
+    autoRefresh;
+    true
+)

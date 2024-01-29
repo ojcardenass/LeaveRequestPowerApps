@@ -1,0 +1,7 @@
+/**
+En esta sección se encuentran las funciones que se ejecutan al iniciar la pagina
+Cambiar el valor de la variable "labelTxt" a "false" para ocultar el texto de error
+Cambiar el valor de la variable "passView" a "TextMode.Password" para definir el campo de contraseña como un campo de contraseña
+**/
+Set(labelTxt;false);;
+Set(passView;TextMode.Password)

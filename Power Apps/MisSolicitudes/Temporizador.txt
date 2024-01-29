@@ -1,0 +1,11 @@
+/** 
+ * Propiedad: AutoStart
+ * 
+ */
+autoRefresh
+
+/** 
+ * Propiedad: OnTimerEnd
+ * 
+ */
+Refresh(solicitudes)

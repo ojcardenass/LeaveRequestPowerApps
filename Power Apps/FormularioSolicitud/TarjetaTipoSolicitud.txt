@@ -1,0 +1,11 @@
+/**
+ * Propiedad: OnSelect
+ * Guarda en la variable global diasPerm la cantidad de dias permitidos para el tipo de solicitud seleccionado
+*/
+Set(
+    diasPerm;
+    LookUp(
+        diaspermitidos;
+        Permiso = tipoSolicitud.Selected.Value
+    ).Cantidad
+);;

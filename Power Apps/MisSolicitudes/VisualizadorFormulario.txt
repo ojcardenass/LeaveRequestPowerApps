@@ -1,0 +1,11 @@
+/**
+ * Propiedad: Item
+ * Se muestran los datos del registro seleccionado en la galería
+*/
+Gallery4.Selected
+
+/**
+ * Propiedad: DataSource
+ * Se muestran los datos del registro seleccionado en la galería
+*/
+solicitudes
